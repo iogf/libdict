@@ -4,8 +4,9 @@ The libdict is a python lib to do translations using google translator.
 Install
 =======
 
-cd /tmp/
-
+~~~
+pip install libdict
+~~~
 
 Usage
 =====
@@ -28,5 +29,6 @@ The other way is through the script gdict.
 ~~~    
 gdict -s en -t pt word is cool
 ~~~
+
 
 
