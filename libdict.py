@@ -31,7 +31,7 @@ class GoogleTranslator(object):
         data = re.sub(self.reg, ',', req.text)
         data = json.loads(data)
         data = ' '.join(map(lambda ind: ind[0], data[0]))
-        return data
+        return data.encode('utf-8')
 
 
 
