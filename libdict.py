@@ -1,6 +1,8 @@
 import urllib
 import requests
 import re
+import json
+
 """
 Lang codes
 LANG = ['pt', 'en', 'fr', 'af', 'sq', 'de', 
@@ -20,22 +22,18 @@ The auto code is referring to the language detection feature.
 class GoogleTranslator(object):
     def __init__(self):
         self.addr = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=%s&tl=%s&dt=t&%s"
-        self.reg  = '\[\[\[\"(?P<data>.+?)",'
+        self.reg  = re.compile(',{1,}')
 
     def translate(self, data, lang1, lang2): 
         data = urllib.urlencode({"q":data})
         url  = self.addr % (lang1, lang2, data)
         req  = requests.get(url)
-        data = self.parse(req.text.encode('utf-8'))
+        data = re.sub(self.reg, ',', req.text)
+        data = json.loads(data)
+        data = ' '.join(map(lambda ind: ind[0], data[0]))
         return data
 
-    def parse(self, data):
-        match = re.match(self.reg, data)
 
-        try:
-            return match.group('data')
-        except AttributeError:
-            pass
 
 
 
