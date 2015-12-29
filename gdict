@@ -1,0 +1,21 @@
+#! /usr/bin/env python
+
+from optparse import OptionParser
+from libdict import GoogleTranslator
+
+if __name__ == '__main__':
+    parser   = OptionParser()
+    parser.add_option("-s", "--source", dest="source",
+                      help='-f lang_source', 
+                      metavar="string", default='en')
+                  
+    parser.add_option("-t", "--to", dest="target",
+                      help='-t lang_target', 
+                      metavar="string", default='pt')
+
+    (opt, args) = parser.parse_args()
+    g = GoogleTranslator()
+    data = g.translate(' '.join(args), opt.source, opt.target)
+    print data
+
+
