@@ -1,4 +1,48 @@
 """
-
 """
+
+# It imports basic objects.
+from untwisted.network import *
+from untwisted.utils.stdio import *
+from optparse import OptionParser
+
+class GServer(object):
+    def __init__(self, spin):
+        xmap(spin, ACCEPT, self.handle_accept)
+       
+
+    def handle_accept(self, server, client):
+        Stdin(client)
+        Stdout(client)
+       
+        xmap(client, LOAD, self.handle_load)
+        xmap(client, CLOSE, lambda client, err: lose(client))
+
+    def handle_load(self, client, data):
+        pass
+
+
+if __name__ == '__main__':
+    parser   = OptionParser()
+    parser.add_option("-p", "--port", dest="port",
+                      help='-p port', 
+                      metavar="integer", default=5531)
+                  
+    parser.add_option("-b", "--backlog", dest="backlog",
+                      help='-b backlog', 
+                      metavar="integer", default=50)
+
+    (opt, args) = parser.parse_args()
+
+    spin = Spin()
+    spin.bind(('', int(opt.port))
+    spin.listen(int(opt.backlog))
+    Server(spin)
+
+    GServer(spin)
+    core.gear.mainloop()
+
+
+
+
 
