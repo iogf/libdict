@@ -4,6 +4,8 @@ The libdict is a python lib to do translations using google translator.
 Install
 =======
 
+**Note:** python2 support was dropped. The latest release would work on python3 only.
+
 ~~~
 pip install libdict
 ~~~
@@ -29,6 +31,7 @@ The other way is through the script gdict.
 ~~~    
 gdict -s en -t pt word is cool
 ~~~
+
 
 
 

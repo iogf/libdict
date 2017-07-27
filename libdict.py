@@ -1,4 +1,4 @@
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import requests
 import re
 import json
@@ -25,13 +25,14 @@ class GoogleTranslator(object):
         self.reg  = re.compile(',{1,}')
 
     def translate(self, data, lang1, lang2): 
-        data = urllib.urlencode({"q":data})
+        data = urllib.parse.urlencode({"q":data})
         url  = self.addr % (lang1, lang2, data)
         req  = requests.get(url)
         data = re.sub(self.reg, ',', req.text)
         data = json.loads(data)
-        data = ' '.join(map(lambda ind: ind[0], data[0]))
-        return data.encode('utf-8')
+        data = ' '.join([ind[0] for ind in data[0]])
+        return data
+
 
 
 
