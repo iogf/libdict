@@ -16,6 +16,7 @@ if __name__ == '__main__':
     (opt, args) = parser.parse_args()
     g = GoogleTranslator()
     data = g.translate(' '.join(args), opt.source, opt.target)
-    print data
+    print(data)
+
 
 
